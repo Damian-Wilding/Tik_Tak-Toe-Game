@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
+#include <list>
 using namespace std;
 
 #include "Game_Checker.cpp"
 #include "Opponent.cpp"
 ;
 
+
+//prints out the current updated board
 void PrintBoard(string TopLeft, string TopMiddle, string TopRight, string MiddleLeft, string MiddleMiddle, string MiddleRight, string BottomLeft, string BottomMiddle, string BottomRight)
 {
 	cout << "  " << TopLeft << "  " << "|" << "  " << TopMiddle << "  " << "|" << "  " << TopRight << "\n";
@@ -18,6 +21,8 @@ void PrintBoard(string TopLeft, string TopMiddle, string TopRight, string Middle
 
 int main()
 {
+	//gets the game started for the first time
+	list<string> scores;
 	bool IsGameOver = false;
 	cout << "Welcome \n";
 	string TL = "1";
@@ -31,8 +36,10 @@ int main()
 	string BR = "9";
 	PrintBoard(TL, TM, TR, ML, MM, MR, BL, BM, BR);
 	
+	//the game loop
 	while (IsGameOver == false)
 	{
+		//gets an input from the user and makes sure it's valid
 		string input = "beans";
 		while (input != TL && input != TM && input != TR && input != ML && input != MM && input != MR && input != BL && input != BM && input != BR || input == "O")
 		{
@@ -40,7 +47,7 @@ int main()
 			cin >> input;
 		}
 
-
+		// Sets the spot as now belonging to the player (X)
 		if (input == TL)
 		{
 			TL = "X";
@@ -87,19 +94,23 @@ int main()
 
 		}
 
-
+		//updates the board and checks to see if the game is over
 		PrintBoard(TL, TM, TR, ML, MM, MR, BL, BM, BR);
-
 		IsGameOver = Game_Checker().CheckForGameOver(TL, TM, TR, ML, MM, MR, BL, BM, BR);
+
+		//adds a win for the player if the player has won
 		if (IsGameOver == true)
 		{
-			break;
+			scores.push_back("win");
 		}
+		//continues the game if the player hasn't won 
 		else
 		{
+			//does the enemies turn
 			cout << "\n and now the enemies turn... \n";
 			string opponentsChoice = Opponent().TakeTurn(TL, TM, TR, ML, MM, MR, BL, BM, BR);
 
+			// Sets the opponents choice of a square to be theirs (0)
 			if (opponentsChoice == TL)
 			{
 				TL = "O";
@@ -145,9 +156,47 @@ int main()
 				BR = "O";
 
 			}
+			//handles the case of a tied game
+			else
+			{
+				IsGameOver = true;
+				scores.push_back("tie");
+			}
 
+			//updates board and checks for potential game overs
 			PrintBoard(TL, TM, TR, ML, MM, MR, BL, BM, BR);
 			IsGameOver = Game_Checker().CheckForGameOver(TL, TM, TR, ML, MM, MR, BL, BM, BR);
+
+			//logs the players loss if they've lost
+			if (IsGameOver == true)
+			{
+				scores.push_back("loss");
+			}
+		}
+
+		//starts a new game if the game has ended
+		if (IsGameOver == true)
+		{
+			IsGameOver = false;
+			cout << "\n \n scores: ";
+
+			for (auto v : scores)
+			{
+				cout << v << " ";
+			}
+			cout << "\n \n";
+			TL = "1";
+			TM = "2";
+			TR = "3";
+			ML = "4";
+			MM = "5";
+			MR = "6";
+			BL = "7";
+			BM = "8";
+			BR = "9";
+
+			PrintBoard(TL, TM, TR, ML, MM, MR, BL, BM, BR);
+
 		}
 		
 	}

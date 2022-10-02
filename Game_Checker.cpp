@@ -8,6 +8,8 @@ class Game_Checker
 		{
 
 		}
+
+		//checks the board to see if the game has ended
 		bool CheckForGameOver(string TL, string TM, string TR, string ML, string MM, string MR, string BL, string BM, string BR)
 		{
 			if (TL == TM && TL == TR)
@@ -24,7 +26,7 @@ class Game_Checker
 			}
 			if (ML == MM && ML == MR)
 			{
-				if (TL == "X")
+				if (ML == "X")
 				{
 					cout << "\n YOU WIN! \n ";
 				}
@@ -36,7 +38,7 @@ class Game_Checker
 			}
 			if (BL == BM && BL == BR)
 			{
-				if (TL == "X")
+				if (BL == "X")
 				{
 					cout << "\n YOU WIN! \n ";
 				}
@@ -60,7 +62,7 @@ class Game_Checker
 			}
 			if (TM == MM && TM == BM)
 			{
-				if (TL == "X")
+				if (TM == "X")
 				{
 					cout << "\n YOU WIN! \n ";
 				}
@@ -72,7 +74,7 @@ class Game_Checker
 			}
 			if (TR == MR && TR == BR)
 			{
-				if (TL == "X")
+				if (TR == "X")
 				{
 					cout << "\n YOU WIN! \n ";
 				}
@@ -96,7 +98,7 @@ class Game_Checker
 			}
 			if (BL == MM && BL == TR)
 			{
-				if (TL == "X")
+				if (BL == "X")
 				{
 					cout << "\n YOU WIN! \n ";
 				}

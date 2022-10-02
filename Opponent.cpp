@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class Opponent
+class Opponent : Game_Checker
 {
 	public:
 		Opponent()
@@ -9,11 +9,15 @@ class Opponent
 			
 		}
 
+		//takes all the spots on the board and chooses a random unoccupied one to play. 
+		//function returns which spot it will be playing
 		string TakeTurn(string TL, string TM, string TR, string ML, string MM, string MR, string BL, string BM, string BR)
 		{
+			CheckForGameOver(TL, TM, TR, ML, MM, MR, BL, BM, BR);
 			if ((TL == "O" || TL == "X") && (TM == "O" || TM == "X") && (TR == "O" || TR == "X") && (ML == "O" || ML == "X") && (MM == "O" || MM == "X") && (MR == "O" || MR == "X") && (BL == "O" || BL == "X") && (BM == "O" || BM == "X") && (BR == "O" || BR == "X"))
 			{
 				cout << "Looks like it's a tie. Good Try...";
+				return "tie";
 			}
 			srand((unsigned)time(0));
 			int random = rand() % 10;
