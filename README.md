@@ -14,8 +14,8 @@ I used Visual Studio for this project.
 
 # Useful Websites
 
-* [Web Site Name](https://www.w3schools.com/)
-* [Web Site Name](https://www.geeksforgeeks.org/)
+* [W3 Schools](https://www.w3schools.com/)
+* [Geeks for geeks](https://www.geeksforgeeks.org/)
 
 # Future Work
 
